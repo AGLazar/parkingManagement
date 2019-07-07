@@ -1,13 +1,28 @@
 package com.sda.parkingManagement.model;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
+@Table(name="tickets")
 public class Ticket {
+    @Id
+    @Column
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
     private Date enterDate;
+
+    @Column
     private Date exitDat;
+
+    @Column
     private String code;
+
+    @Column
     private Date payDate;
+
+    @Column
     private int payedAmount;
 
     public Ticket(Long id, Date enterDate, Date exitDat, String code, Date payDate, int payedAmount) {

@@ -2,7 +2,7 @@ package com.sda.parkingManagement.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="parkingSpaces")
+@Table(name="parking_spaces")
 public class ParkingSpace {
     @Id
     @Column
