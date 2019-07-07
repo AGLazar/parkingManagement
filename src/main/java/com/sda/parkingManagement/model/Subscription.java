@@ -1,22 +1,11 @@
 package com.sda.parkingManagement.model;
 
-import javax.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table(name = "subscriptions")
-
 public class Subscription {
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
-    @Column
     private Date startDate;
-    @Column
     private Date endDate;
-    @Column
     private String code;
 
     public Subscription(Long id, Date startDate, Date endDate, String code) {
@@ -26,8 +15,7 @@ public class Subscription {
         this.code = code;
     }
 
-    public Subscription() {
-    }
+    public Subscription(){}
 
     public Long getId() {
         return id;
