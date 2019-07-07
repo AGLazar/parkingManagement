@@ -5,13 +5,15 @@ import javax.persistence.*;
 @Table(name="parkingSpaces")
 public class ParkingSpace {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private Boolean isFree;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "sector_id")
     private Sector sector;
 
     @Column

@@ -10,7 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/parkingSpaces")
 public class ParkingSpaceController {
-    private ParkingSpaceService parkingSpaceService;
+
+    public ParkingSpaceService parkingSpaceService;
 
     @Autowired
     public ParkingSpaceController(ParkingSpaceService parkingSpaceService) {

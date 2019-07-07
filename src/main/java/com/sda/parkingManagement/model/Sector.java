@@ -1,10 +1,20 @@
 package com.sda.parkingManagement.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.util.List;
+@Entity
+@Table(name="sectors")
 public class Sector {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany (mappedBy = "sector")
+    @JsonIgnore
     private List<ParkingSpace> parkingSpaces;
+    @Column
     private String name;
 
     public Sector(Long id, List<ParkingSpace> parkingSpaces, String name) {
