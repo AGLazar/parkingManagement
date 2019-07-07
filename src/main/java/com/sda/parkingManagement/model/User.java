@@ -1,8 +1,17 @@
 package com.sda.parkingManagement.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="users")
 public class User {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String userName;
+    @Column
     private String password;
 
     public User(Long id, String userName, String password) {
