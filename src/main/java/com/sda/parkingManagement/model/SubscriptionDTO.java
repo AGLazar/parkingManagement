@@ -1,10 +1,14 @@
 package com.sda.parkingManagement.model;
 
-public class TicketDTO {
+public class SubscriptionDTO {
     private String code;
 
-    public TicketDTO(String code) {
+    public SubscriptionDTO(String code) {
         this.code = code;
+    }
+
+    public SubscriptionDTO(){
+
     }
 
     public String getCode() {
@@ -14,5 +18,4 @@ public class TicketDTO {
     public void setCode(String code) {
         this.code = code;
     }
-
 }
