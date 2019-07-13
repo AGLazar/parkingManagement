@@ -6,8 +6,6 @@ import java.util.Date;
 @Table(name="tickets")
 public class Ticket {
     @Id
-
-    //kn
     @Column
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
