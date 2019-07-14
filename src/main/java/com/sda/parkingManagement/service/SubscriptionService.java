@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SubscriptionService {
@@ -32,4 +34,22 @@ public class SubscriptionService {
         Date date = new Date();
         return "S" + date.getTime();
     }
+
+    public Subscription getSubscriptionById(Long id) {
+        Optional<Subscription> subscription = subscriptionRepository.findById(id);
+        return subscription.orElse(null);
+    }
+
+    public Subscription findSubscriptionByCode(String code) {
+        return subscriptionRepository.findByCode(code);
+    }
+
+    public long calculatePeriod(Subscription subscription, TimeUnit timeUnit){
+        long diffInMin = subscription.getStartDate().getTime()-subscription.getEndDate().getTime();
+        return  timeUnit.convert(diffInMin,TimeUnit.HOURS);
+    }
+
+
+
+
 }

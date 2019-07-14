@@ -7,6 +7,10 @@ public class TicketDTO {
         this.code = code;
     }
 
+    public TicketDTO() {
+
+    }
+
     public String getCode() {
         return code;
     }
