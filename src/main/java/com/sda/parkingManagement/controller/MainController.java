@@ -1,5 +1,6 @@
 package com.sda.parkingManagement.controller;
 
+
 import com.sda.parkingManagement.model.Subscription;
 import com.sda.parkingManagement.model.Ticket;
 import com.sda.parkingManagement.model.TicketDTO;
@@ -36,6 +37,14 @@ public class MainController {
         return "publicPage";
     }
 
+    @PostMapping(value = "/payTicket",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String payTicket(TicketDTO ticketDTO, Model model){
+        String code = ticketDTO.getCode();
+        ticketService.calculatePrice(code);
+        model.addAttribute("ticketCode1","Thank You!");
+        return "publicPage";
+    }
 
     @PostMapping (value = "/createSubscription")
     public void createSubscription (Subscription subscription){
@@ -44,10 +53,6 @@ public class MainController {
 
     public void exitParking(Ticket ticket){
     }
-
-
-
-
 
 
 

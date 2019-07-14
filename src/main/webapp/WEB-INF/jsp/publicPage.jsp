@@ -30,14 +30,13 @@
 </div>
 
 <div id="div2">
-    <form action="/action_page.php" method="post">
+    <form action="/payTicket" method="post">
         <br><br><br>PAY<br><br>
-        Sum to pay: <input type="text" name="sumToPay">
+        Insert your ticket code: <input type="text" name="code">
         <input type="submit" value="Pay Parking">
-
         <br>
 
-        Calculate sum to pay: <input type="text" name="sumToPay">
+        You have to pay: <input type="text" name="Pay">
         <input type="submit" value="Pay Parking">
     </form>
 </div>
