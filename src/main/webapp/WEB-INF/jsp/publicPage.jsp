@@ -30,15 +30,14 @@
 </div>
 
 <div id="div2">
-    <form action="/action_page.php" method="post">
+    <form action="/payTicket" method="post">
         <br><br><br>PAY<br><br>
-        Sum to pay: <input type="text" name="sumToPay">
-        <input type="submit" value="Pay Parking">
+        Insert Code: <input type="text" name="code">
+        <input type="submit" value="Calculate">
 
+        <input type="submit" value="Pay">
         <br>
-
-        Calculate sum to pay: <input type="text" name="sumToPay">
-        <input type="submit" value="Pay Parking">
+        <c:out value="${price}"/> lei
     </form>
 </div>
 

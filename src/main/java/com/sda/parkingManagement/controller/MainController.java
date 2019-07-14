@@ -64,5 +64,13 @@ public class MainController {
     public void exitParking(Ticket ticket) {
     }
 
+    @PostMapping(value = "/payTicket",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String payTicket(TicketDTO ticketDTO, Model model){
+        long response = ticketService.calculatePrice(ticketDTO.getCode());
+        model.addAttribute("price", response);
+        return "publicPage";
+    }
+
 
 }
