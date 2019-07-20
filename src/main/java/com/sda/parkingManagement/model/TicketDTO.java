@@ -2,10 +2,7 @@ package com.sda.parkingManagement.model;
 
 public class TicketDTO {
     private String code;
-
-    public TicketDTO(String code) {
-        this.code = code;
-    }
+    private Boolean calculated;
 
     public String getCode() {
         return code;
@@ -15,4 +12,11 @@ public class TicketDTO {
         this.code = code;
     }
 
+    public Boolean isCalculated() {
+        return calculated == null ? false : calculated;
+    }
+
+    public void setCalculated(Boolean calculated) {
+        this.calculated = calculated;
+    }
 }

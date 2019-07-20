@@ -32,22 +32,37 @@
 <div id="div2">
     <form action="/payTicket" method="post">
         <br><br><br>PAY<br><br>
-        Insert your ticket code: <input type="text" name="code">
-        <input type="submit" value="Pay Parking">
+        <input type="hidden" name="calculated" value='<c:out value="${calculated}"/>'/>
+        Insert Code: <input type="text" name="code">
+
+        <c:if test="${not calculated}">
+            <input type="submit" value="Calculate">
+        </c:if>
+
+
+        <br>
+        <c:out value="${price}"/> lei
         <br>
 
-        You have to pay: <input type="text" name="Pay">
-        <input type="submit" value="Pay Parking">
+        <c:if test="${calculated}">
+            <input type="submit" value="Pay">
+            <c:out value="${payed}"/>
+        </c:if>
+        <c:if test="${not empty payedMessage}">
+            <c:out value="${payedMessage}"/>
+        </c:if>
     </form>
 </div>
 
 <div id="div3">
-    <form action="/action_page.php" method="post">
+    <form action="/exit" method="post">
 
         <br><br><br>EXIT<br><br><br>
 
-        Enter Code: <input type="text" name="insertCode">
+        Enter Code: <input type="text" name="code">
         <input type="submit" value="Exit Parking">
+        <br>
+        <c:out value="${validate}"/>
     </form>
 </div>
 
