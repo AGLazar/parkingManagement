@@ -32,43 +32,50 @@
 <div id="div2">
     <form action="/payTicket" method="post">
         <br><br><br>PAY<br><br>
+        <input type="hidden" name="calculated" value='<c:out value="${calculated}"/>'/>
         Insert Code: <input type="text" name="code">
-        <input type="submit" value="Calculate">
 
-        <input type="submit" value="Pay">
+        <c:if test="${not calculated}">
+            <input type="submit" value="Calculate">
+        </c:if>
+
+
         <br>
         <c:out value="${price}"/> lei
+        <br>
+
+        <c:if test="${calculated}">
+            <input type="submit" value="Pay">
+            <c:out value="${payed}"/>
+        </c:if>
+        <c:if test="${not empty payedMessage}">
+            <c:out value="${payedMessage}"/>
+        </c:if>
     </form>
 </div>
 
 <div id="div3">
-    <form action="/action_page.php" method="post">
+    <form action="/exit" method="post">
 
         <br><br><br>EXIT<br><br><br>
 
-        Enter Code: <input type="text" name="insertCode">
+        Enter Code: <input type="text" name="code">
         <input type="submit" value="Exit Parking">
+        <br>
+        <c:out value="${validate}"/>
     </form>
 </div>
 
 <div id="div4">
-    <form action="/action_page.php" method="submit">
-
-        <br><br><br>SUBSCRIPTION <br><br><br>
-        Sub start date
-
-        <input type="date" name="subscriptionStartDate"><br>
-    </form>
-
-    <form action="/action_page.php" method="submit">
-        Sub end date
-
-        <input type="date" name="subscriptionEndDate"><br>
-    </form>
-
     <form action="/createSubscription" method="post">
-        Your code: <input type="text" name="generatedCode">
-        <input type="submit" value="Get Code">
+        <br><br><br>SUBSCRIPTION <br><br><br>
+
+        Start date<input type="date" name="startDate" value='<c:out value="${startDate}"/>'/><br>
+        End date<input type="date" name="endDate" value='<c:out value="${endDate}"/>'/><br>
+        <input type="submit" value="Get Code"/>
+        <c:if test="${not empty generatedCode}">
+           Your code is <c:out value="${generatedCode}"/>
+        </c:if>
     </form>
 
 </div>

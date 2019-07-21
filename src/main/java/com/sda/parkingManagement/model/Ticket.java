@@ -2,40 +2,37 @@ package com.sda.parkingManagement.model;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
-@Table(name="tickets")
+@Table(name = "tickets")
 public class Ticket {
     @Id
     @Column
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
     private Date enterDate;
 
     @Column
-    private Date exitDat;
+    private Date payDate;
 
     @Column
     private String code;
 
     @Column
-    private Date payDate;
+    private long payedAmount;
 
-    @Column
-    private int payedAmount;
-
-    public Ticket(Long id, Date enterDate, Date exitDat, String code, Date payDate, int payedAmount) {
+    public Ticket(Long id, Date enterDate, Date payDate, String code, long payedAmount) {
         this.id = id;
         this.enterDate = enterDate;
-        this.exitDat = exitDat;
-        this.code = code;
         this.payDate = payDate;
+        this.code = code;
         this.payedAmount = payedAmount;
     }
 
-
-    public Ticket(){}
+    public Ticket() {
+    }
 
     public Long getId() {
         return id;
@@ -53,12 +50,12 @@ public class Ticket {
         this.enterDate = enterDate;
     }
 
-    public Date getExitDat() {
-        return exitDat;
+    public Date getPayDate() {
+        return payDate;
     }
 
-    public void setExitDat(Date exitDat) {
-        this.exitDat = exitDat;
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 
     public String getCode() {
@@ -69,19 +66,11 @@ public class Ticket {
         this.code = code;
     }
 
-    public Date getPayDate() {
-        return payDate;
-    }
-
-    public void setPayDate(Date payDate) {
-        this.payDate = payDate;
-    }
-
-    public int getPayedAmount() {
+    public long getPayedAmount() {
         return payedAmount;
     }
 
-    public void setPayedAmount(int payedAmount) {
+    public void setPayedAmount(long payedAmount) {
         this.payedAmount = payedAmount;
     }
 }

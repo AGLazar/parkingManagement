@@ -1,18 +1,13 @@
 package com.sda.parkingManagement.service;
 
-import com.sda.parkingManagement.model.Subscription;
 import com.sda.parkingManagement.model.Ticket;
 import com.sda.parkingManagement.model.TicketDTO;
-import com.sda.parkingManagement.model.TicketDTOBuilder;
 import com.sda.parkingManagement.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.sda.parkingManagement.model.TicketDTOBuilder.aTicketDTO;
 
 @Service
 public class TicketService {
@@ -29,10 +24,9 @@ public class TicketService {
         Date date = new Date();
         ticket.setEnterDate(date);
         ticketRepository.save(ticket);
-
-        return aTicketDTO()
-                .withCode(ticket.getCode())
-                .build();
+        TicketDTO ticketDTO = new TicketDTO();
+        ticketDTO.setCode(ticket.getCode());
+        return ticketDTO;
     }
 
     public String generateRandomCode() {
@@ -47,12 +41,36 @@ public class TicketService {
     }
 
     public long calculatePeriod(Ticket ticket) {
-        long diffInMin = ticket.getExitDat().getTime() - ticket.getEnterDate().getTime();
+        long diffInMin = new Date().getTime() - ticket.getEnterDate().getTime();
         return TimeUnit.HOURS.convert(diffInMin, TimeUnit.MILLISECONDS);
     }
 
 
+    public boolean payTicket(String code){
+        Ticket ticket = ticketRepository.getTicketByCode(code);
+
+        if(ticket == null)
+            return false;
+
+        //TODO: calculate
+        long payedAmount = calculatePrice(code);
+
+        //TODO set payed amount and payed date
+        Date currentTime = new Date();
+        ticket.setPayDate(currentTime);
+        ticket.setPayedAmount(payedAmount);
+        ticketRepository.save(ticket);
+        return true;
     }
 
-
-
+    public boolean exit(String code){
+        Ticket ticket = ticketRepository.getTicketByCode(code);
+        if (ticket == null)
+            return false;
+        if (ticket.getPayDate().getTime() > new Date().getTime() + 30){
+            return false;
+        } else {
+            return true;
+        }
+    }
+}

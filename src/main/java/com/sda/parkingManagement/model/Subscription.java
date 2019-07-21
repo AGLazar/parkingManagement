@@ -21,6 +21,7 @@ public class Subscription {
     private Date endDate;
 
     @Column
+    @NotNull
     private String code;
 
     public Subscription(Date startDate, Date endDate, String code) {

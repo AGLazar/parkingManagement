@@ -1,21 +1,13 @@
 package com.sda.parkingManagement.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class SubscriptionDTO {
     private String code;
     private Date endDate;
     private Date startDate;
-
-    public SubscriptionDTO(String code, Date endDate, Date startDate) {
-        this.code = code;
-        this.endDate = endDate;
-        this.startDate = startDate;
-    }
-
-    public SubscriptionDTO(){
-
-    }
 
     public String getCode() {
         return code;

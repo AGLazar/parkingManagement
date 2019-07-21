@@ -4,7 +4,6 @@ package com.sda.parkingManagement.service;
 import com.sda.parkingManagement.model.Subscription;
 import com.sda.parkingManagement.model.SubscriptionDTO;
 import com.sda.parkingManagement.repository.SubscriptionRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,21 +16,18 @@ public class SubscriptionService {
     @Autowired
     public SubscriptionRepository subscriptionRepository;
 
-    public SubscriptionDTO createSubscription() {
+    public SubscriptionDTO createSubscription(SubscriptionDTO subscriptionDTO) {
         Subscription subscription = new Subscription();
         subscription.setCode(generateRandomCode());
-        Date date1 = new Date();
-        Date date2 = new Date();
-        subscription.setStartDate(date1);
-        subscription.setEndDate(date2);
+        subscription.setEndDate(subscriptionDTO.getEndDate());
+        subscription.setStartDate(subscriptionDTO.getStartDate());
         subscriptionRepository.save(subscription);
 
-        SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
-        subscriptionDTO.setCode(subscription.getCode());
-        subscriptionDTO.setStartDate(subscription.getStartDate());
-        subscriptionDTO.setEndDate(subscription.getEndDate());
-        return subscriptionDTO;
-
+        SubscriptionDTO result = new SubscriptionDTO();
+        result.setCode(subscription.getCode());
+        result.setStartDate(subscription.getStartDate());
+        result.setEndDate(subscription.getEndDate());
+        return result;
     }
 
     public String generateRandomCode(){
@@ -54,6 +50,16 @@ public class SubscriptionService {
     }
 
 
+    public boolean exit(String code) {
+        Subscription subscription = subscriptionRepository.findByCode(code);
+        if(subscription == null){
+            return false;
+        }
+        if(subscription.getEndDate().before(new Date())){
+            return false;
+        }
+        else return true;
+    }
 
 
 }
