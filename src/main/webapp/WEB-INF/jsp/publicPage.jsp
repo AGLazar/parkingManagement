@@ -66,7 +66,7 @@
         <input type="date" name="subscriptionEndDate"><br>
     </form>
 
-    <form action="/action_page.php" method="post">
+    <form action="/createSubscription" method="post">
         Your code: <input type="text" name="generatedCode">
         <input type="submit" value="Get Code">
     </form>

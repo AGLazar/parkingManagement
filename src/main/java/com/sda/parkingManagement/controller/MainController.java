@@ -1,6 +1,7 @@
 package com.sda.parkingManagement.controller;
 
 import com.sda.parkingManagement.model.Subscription;
+import com.sda.parkingManagement.model.SubscriptionDTO;
 import com.sda.parkingManagement.model.Ticket;
 import com.sda.parkingManagement.model.TicketDTO;
 import com.sda.parkingManagement.service.SubscriptionService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Controller
@@ -43,7 +45,7 @@ public class MainController {
 
         String code = ticketDTO.getCode();
         if (!StringUtils.isEmpty(code)) {
-            if (Objects.nonNull(subscriptionService.findSubscriptionByCode(code))){
+            if (Objects.nonNull(subscriptionService.findSubscriptionByCode(code))) {
                 model.addAttribute("ticketCode", "SubscriptionFound");
             } else {
                 model.addAttribute("ticketCode", "SubscriptionNotFound");
@@ -56,9 +58,15 @@ public class MainController {
     }
 
 
-    @PostMapping(value = "/createSubscription")
-    public void createSubscription(Subscription subscription) {
-        subscriptionService.createSubscription();
+    @PostMapping(value = "/createSubscription",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createSubscription(SubscriptionDTO subscriptionDTO, Model model) {
+        String code = subscriptionDTO.getCode();
+        Date startDate = subscriptionDTO.getStartDate();
+        Date endDate = subscriptionDTO.getEndDate();
+        SubscriptionDTO response = subscriptionService.createSubscription();
+        model.addAttribute("ticketCode", response.getCode());
+        return "publicPage";
     }
 
     public void exitParking(Ticket ticket) {
@@ -66,11 +74,15 @@ public class MainController {
 
     @PostMapping(value = "/payTicket",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String payTicket(TicketDTO ticketDTO, Model model){
+    public String payTicket(TicketDTO ticketDTO, Model model) {
         long response = ticketService.calculatePrice(ticketDTO.getCode());
         model.addAttribute("price", response);
         return "publicPage";
     }
+
+
+
+
 
 
 }

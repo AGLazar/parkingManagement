@@ -20,12 +20,16 @@ public class SubscriptionService {
     public SubscriptionDTO createSubscription() {
         Subscription subscription = new Subscription();
         subscription.setCode(generateRandomCode());
-        Date date = new Date();
-        subscription.setStartDate(date);
+        Date date1 = new Date();
+        Date date2 = new Date();
+        subscription.setStartDate(date1);
+        subscription.setEndDate(date2);
         subscriptionRepository.save(subscription);
 
         SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
         subscriptionDTO.setCode(subscription.getCode());
+        subscriptionDTO.setStartDate(subscription.getStartDate());
+        subscriptionDTO.setEndDate(subscription.getEndDate());
         return subscriptionDTO;
 
     }

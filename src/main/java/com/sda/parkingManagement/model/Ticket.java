@@ -34,6 +34,7 @@ public class Ticket {
         this.payedAmount = payedAmount;
     }
 
+
     public Ticket(){}
 
     public Long getId() {
